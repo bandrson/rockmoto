@@ -167,100 +167,104 @@
   </component>
   <component name="RailsPaths" isManagedAutomatically="true">
     <entry key="app">
-      <value>file://$MODULE_DIR$/app</value>
+      <value>file://$MODULE_DIR$/../rockmoto\app</value>
     </entry>
     <entry key="app/assets">
-      <value>file://$MODULE_DIR$/app/assets</value>
+      <value>file://$MODULE_DIR$/../rockmoto\app/assets</value>
     </entry>
     <entry key="app/channels">
-      <value>file://$MODULE_DIR$/app/channels</value>
+      <value>file://$MODULE_DIR$/../rockmoto\app/channels</value>
     </entry>
     <entry key="app/controllers">
-      <value>file://$MODULE_DIR$/app/controllers</value>
+      <value>file://$MODULE_DIR$/../rockmoto\app/controllers</value>
     </entry>
     <entry key="app/helpers">
-      <value>file://$MODULE_DIR$/app/helpers</value>
+      <value>file://$MODULE_DIR$/../rockmoto\app/helpers</value>
     </entry>
     <entry key="app/mailers">
-      <value>file://$MODULE_DIR$/app/mailers</value>
+      <value>file://$MODULE_DIR$/../rockmoto\app/mailers</value>
     </entry>
     <entry key="app/models">
-      <value>file://$MODULE_DIR$/app/models</value>
+      <value>file://$MODULE_DIR$/../rockmoto\app/models</value>
     </entry>
     <entry key="app/views">
-      <value>file://$MODULE_DIR$/app/views</value>
+      <value>file://$MODULE_DIR$/../rockmoto\app/views</value>
     </entry>
     <entry key="config">
-      <value>file://$MODULE_DIR$/config</value>
+      <value>file://$MODULE_DIR$/../rockmoto\config</value>
     </entry>
     <entry key="config/cable">
-      <value>file://$MODULE_DIR$/config/cable.yml</value>
+      <value>file://$MODULE_DIR$/../rockmoto\config/cable.yml</value>
     </entry>
     <entry key="config/database">
-      <value>file://$MODULE_DIR$/config/database.yml</value>
+      <value>file://$MODULE_DIR$/../rockmoto\config/database.yml</value>
     </entry>
     <entry key="config/environment">
-      <value>file://$MODULE_DIR$/config/environment.rb</value>
+      <value>file://$MODULE_DIR$/../rockmoto\config/environment.rb</value>
     </entry>
     <entry key="config/environments">
-      <value>file://$MODULE_DIR$/config/environments</value>
+      <value>file://$MODULE_DIR$/../rockmoto\config/environments</value>
     </entry>
     <entry key="config/initializers">
-      <value>file://$MODULE_DIR$/config/initializers</value>
+      <value>file://$MODULE_DIR$/../rockmoto\config/initializers</value>
     </entry>
     <entry key="config/locales">
-      <value>file://$MODULE_DIR$/config/locales</value>
+      <value>file://$MODULE_DIR$/../rockmoto\config/locales</value>
     </entry>
     <entry key="config/routes">
-      <value>file://$MODULE_DIR$/config/routes</value>
+      <value>file://$MODULE_DIR$/../rockmoto\config/routes</value>
     </entry>
     <entry key="config/routes.rb">
-      <value>file://$MODULE_DIR$/config/routes.rb</value>
+      <value>file://$MODULE_DIR$/../rockmoto\config/routes.rb</value>
     </entry>
     <entry key="config/secrets">
-      <value>file://$MODULE_DIR$/config</value>
+      <value>file://$MODULE_DIR$/../rockmoto\config</value>
     </entry>
     <entry key="db">
-      <value>file://$MODULE_DIR$/db</value>
+      <value>file://$MODULE_DIR$/../rockmoto\db</value>
     </entry>
     <entry key="db/migrate">
-      <value>file://$MODULE_DIR$/db/migrate</value>
+      <value>file://$MODULE_DIR$/../rockmoto\db/migrate</value>
     </entry>
     <entry key="db/seeds.rb">
-      <value>file://$MODULE_DIR$/db/seeds.rb</value>
+      <value>file://$MODULE_DIR$/../rockmoto\db/seeds.rb</value>
     </entry>
     <entry key="lib">
-      <value>file://$MODULE_DIR$/lib</value>
+      <value>file://$MODULE_DIR$/../rockmoto\lib</value>
     </entry>
     <entry key="lib/assets">
-      <value>file://$MODULE_DIR$/lib/assets</value>
+      <value>file://$MODULE_DIR$/../rockmoto\lib/assets</value>
     </entry>
     <entry key="lib/tasks">
-      <value>file://$MODULE_DIR$/lib/tasks</value>
+      <value>file://$MODULE_DIR$/../rockmoto\lib/tasks</value>
     </entry>
     <entry key="lib/templates">
-      <value>file://$MODULE_DIR$/lib/templates</value>
+      <value>file://$MODULE_DIR$/../rockmoto\lib/templates</value>
     </entry>
     <entry key="log">
-      <value>file://$MODULE_DIR$/log/development.log</value>
+      <value>file://$MODULE_DIR$/../rockmoto\log/development.log</value>
     </entry>
     <entry key="public">
-      <value>file://$MODULE_DIR$/public</value>
+      <value>file://$MODULE_DIR$/../rockmoto\public</value>
     </entry>
     <entry key="public/javascripts">
-      <value>file://$MODULE_DIR$/public/javascripts</value>
+      <value>file://$MODULE_DIR$/../rockmoto\public/javascripts</value>
     </entry>
     <entry key="public/stylesheets">
-      <value>file://$MODULE_DIR$/public/stylesheets</value>
+      <value>file://$MODULE_DIR$/../rockmoto\public/stylesheets</value>
+    </entry>
+    <entry key="test/mailers/previews">
+      <value>file:///mnt/d/Code/RubymineProjects/rockmoto/test/mailers/previews</value>
+      <value>file://$MODULE_DIR$/../rockmoto\test/mailers/previews</value>
     </entry>
     <entry key="tmp">
-      <value>file://$MODULE_DIR$/tmp</value>
+      <value>file://$MODULE_DIR$/../rockmoto\tmp</value>
     </entry>
     <entry key="vendor">
-      <value>file://$MODULE_DIR$/vendor</value>
+      <value>file://$MODULE_DIR$/../rockmoto\vendor</value>
     </entry>
     <entry key="vendor/assets">
-      <value>file://$MODULE_DIR$/vendor/assets</value>
+      <value>file://$MODULE_DIR$/../rockmoto\vendor/assets</value>
     </entry>
   </component>
   <component name="RakeTasksCache-v2">
@@ -474,6 +478,14 @@
                   <RakeTaskImpl description="Update the Stimulus manifest (will overwrite controllers/index.js)" fullCommand="stimulus:manifest:update" id="update" />
                 </subtasks>
               </RakeTaskImpl>
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl id="tailwindcss">
+            <subtasks>
+              <RakeTaskImpl description="Build your Tailwind CSS" fullCommand="tailwindcss:build" id="build" />
+              <RakeTaskImpl description="Remove CSS builds" fullCommand="tailwindcss:clobber" id="clobber" />
+              <RakeTaskImpl description="Install Tailwind CSS into the app" fullCommand="tailwindcss:install" id="install" />
+              <RakeTaskImpl description="Watch and build your Tailwind CSS on file changes" fullCommand="tailwindcss:watch" id="watch" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl description="Run all tests in test folder except system ones" fullCommand="test" id="test" />
