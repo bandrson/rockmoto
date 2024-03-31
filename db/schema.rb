@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_045831) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_31_051545) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -139,6 +139,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_045831) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false
+    t.jsonb "extended_data", default: "{}", null: false
+    t.index ["extended_data"], name: "index_products_on_extended_data", using: :gin
     t.index ["product_brand_id"], name: "index_products_on_product_brand_id"
     t.index ["product_category_id"], name: "index_products_on_product_category_id"
   end

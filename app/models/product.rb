@@ -11,6 +11,7 @@ class Product < ApplicationRecord
   validates :price,
             presence: true,
             numericality: { greater_than_or_equal_to: 0 }
+  validates :extended_data, presence: true
 
   def self.ransackable_associations(auth_object = nil)
     ["product_brand", "product_category"]
