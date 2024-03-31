@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :product_brand
   belongs_to :product_category
+  has_one_attached :image
 
   validates :product_brand, presence: true
   validates :product_category, presence: true
