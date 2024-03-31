@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   validates :product_brand, presence: true
   validates :product_category, presence: true
   validates :product_number, presence: true
+  validates :name, presence: true
   validates :description, presence: true
   validates :price,
             presence: true,
@@ -15,6 +16,6 @@ class Product < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "description", "price", "product_brand_id", "product_category_id", "product_number", "updated_at"]
+    ["created_at", "name", "description", "price", "product_brand_id", "product_category_id", "product_number", "updated_at"]
   end
 end
