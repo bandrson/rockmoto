@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_051545) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_10_045204) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -166,14 +166,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_051545) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "vehicles", force: :cascade do |t|
-    t.bigint "vehicle_make_id", null: false
-    t.bigint "vehicle_model_id", null: false
+  create_table "vehicle_years", force: :cascade do |t|
     t.integer "year", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "vehicles", force: :cascade do |t|
+    t.bigint "vehicle_make_id", null: false
+    t.bigint "vehicle_model_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "vehicle_year_id", null: false
     t.index ["vehicle_make_id"], name: "index_vehicles_on_vehicle_make_id"
     t.index ["vehicle_model_id"], name: "index_vehicles_on_vehicle_model_id"
+    t.index ["vehicle_year_id", "vehicle_make_id", "vehicle_model_id"], name: "idx_on_vehicle_year_id_vehicle_make_id_vehicle_mode_807440ed77", unique: true
+    t.index ["vehicle_year_id"], name: "index_vehicles_on_vehicle_year_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -189,4 +197,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_051545) do
   add_foreign_key "products", "product_categories"
   add_foreign_key "vehicles", "vehicle_makes"
   add_foreign_key "vehicles", "vehicle_models"
+  add_foreign_key "vehicles", "vehicle_years"
 end
