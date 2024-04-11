@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :product_brand
-  belongs_to :product_category
+  belongs_to :product_type
   has_one_attached :image
 
   validates :product_brand, presence: true
@@ -18,6 +18,6 @@ class Product < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "name", "description", "price", "product_brand_id", "product_category_id", "product_number", "updated_at"]
+    ["created_at", "name", "description", "price", "product_brand_id", "product_type_id", "product_number", "updated_at"]
   end
 end

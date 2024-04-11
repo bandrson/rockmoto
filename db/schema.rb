@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_10_045204) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_11_015203) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -113,11 +113,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_045204) do
   end
 
   create_table "product_categories", force: :cascade do |t|
-    t.bigint "parent_id"
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["parent_id"], name: "index_product_categories_on_parent_id"
   end
 
   create_table "product_fitments", force: :cascade do |t|
@@ -130,9 +128,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_045204) do
     t.index ["vehicle_id"], name: "index_product_fitments_on_vehicle_id"
   end
 
+  create_table "product_types", force: :cascade do |t|
+    t.string "name"
+    t.bigint "product_category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_category_id"], name: "index_product_types_on_product_category_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.bigint "product_brand_id", null: false
-    t.bigint "product_category_id", null: false
     t.string "product_number", null: false
     t.text "description", null: false
     t.decimal "price", precision: 10, scale: 2, null: false
@@ -140,9 +145,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_045204) do
     t.datetime "updated_at", null: false
     t.string "name", null: false
     t.jsonb "extended_data", default: "{}", null: false
+    t.bigint "product_type_id"
     t.index ["extended_data"], name: "index_products_on_extended_data", using: :gin
     t.index ["product_brand_id"], name: "index_products_on_product_brand_id"
-    t.index ["product_category_id"], name: "index_products_on_product_category_id"
+    t.index ["product_type_id"], name: "index_products_on_product_type_id"
   end
 
   create_table "provinces", force: :cascade do |t|
@@ -150,6 +156,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_045204) do
     t.decimal "pst_rate", precision: 10, scale: 2
     t.decimal "gst_rate", precision: 10, scale: 2
     t.decimal "hst_rate", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "remove_parent_from_product_categories", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -190,11 +201,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_045204) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "customers"
-  add_foreign_key "product_categories", "product_categories", column: "parent_id"
   add_foreign_key "product_fitments", "products"
   add_foreign_key "product_fitments", "vehicles"
+  add_foreign_key "product_types", "product_categories"
   add_foreign_key "products", "product_brands"
-  add_foreign_key "products", "product_categories"
   add_foreign_key "vehicles", "vehicle_makes"
   add_foreign_key "vehicles", "vehicle_models"
   add_foreign_key "vehicles", "vehicle_years"
