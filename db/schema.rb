@@ -160,11 +160,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_015203) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "remove_parent_from_product_categories", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "vehicle_makes", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
