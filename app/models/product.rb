@@ -4,10 +4,12 @@ class Product < ApplicationRecord
   has_one_attached :image
 
   validates :product_brand, presence: true
-  validates :product_category, presence: true
+  validates :product_type, presence: true
   validates :product_number, presence: true
   validates :name, presence: true
-  validates :description, presence: true
+  validates :description,
+            presence: true,
+            allow_blank: true
   validates :price,
             presence: true,
             numericality: { greater_than_or_equal_to: 0 }

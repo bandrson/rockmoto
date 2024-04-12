@@ -1,4 +1,6 @@
 class VehicleYear < ApplicationRecord
+  has_many :vehicles
+
   validates :year,
             presence: true,
             numericality: { only_integer: true },
