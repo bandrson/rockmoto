@@ -8,5 +8,15 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "pages#home"
+  root "catalog#index"
+
+  resources :catalog do
+    collection do
+      get :show_years
+      get :show_models
+      get :show_categories
+      get :show_types
+      get :show_products
+    end
+  end
 end
