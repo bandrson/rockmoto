@@ -3,28 +3,15 @@
     <div class="w-6 flex justify-center"> <!-- Line -->
       <div class="w-[2px] h-full bg-black"></div>
     </div>
-    <ul class="ml-2 mt-1">
-      <% @years.each do |year| %>
-        <li>
-          <%= turbo_frame_tag year do %>
-            <h2 id="accordion-heading-<%= dom_id(year) %>">
-              <button type="button" class="flex items-center font-medium gap-1" data-accordion-target="#accordion-body-<%= dom_id(year) %>" aria-expanded="false" aria-controls="accordion-body-<%= dom_id(year) %>">
-                <svg data-accordion-inactive-icon class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                </svg>
-                <svg data-accordion-active-icon class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                </svg>
-                <span><%= year.year %></span>
-              </button>
-            </h2>
 
-            <div id="accordion-body-<%= dom_id(year) %>" class="hidden -mt-1" aria-labelledby="accordion-heading-<%= dom_id(year) %>">
-              <%= turbo_frame_tag year, src: show_models_catalog_index_path(params: { make: @make.name, year: year.year }), loading: "lazy" %>
-            </div>
+    <div class="ml-2 mt-1">
+      <div id="accordion-years" data-accordion="open" data-active-classes="bg-white text-gray-900" data-inactive-classes="text-gray-900">
+        <% @years.each do |year| %>
+          <%= render layout: "accordion_item", locals: { item: year, item_name: year.year } do %>
+            <%= turbo_frame_tag year, src: show_models_catalog_index_path(params: { make: @make.name, year: year.year }), loading: "lazy" %>
           <% end %>
-        </li>
-      <% end %>
-    </ul>
+        <% end %>
+      </div>
+    </div>
   </div>
 <% end %>

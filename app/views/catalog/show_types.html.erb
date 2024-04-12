@@ -3,26 +3,15 @@
     <div class="w-6 flex justify-center"> <!-- Line -->
       <div class="w-[2px] h-full bg-black"></div>
     </div>
-    <ul class="ml-2 mt-1">
-      <% @types.each do |type| %>
-        <%= turbo_frame_tag type do %>
-          <h2 id="accordion-heading-<%= dom_id(type) %>">
-            <button type="button" class="flex items-center font-medium gap-1" data-accordion-target="#accordion-body-<%= dom_id(type) %>" aria-expanded="false" aria-controls="accordion-body-<%= dom_id(type) %>">
-              <svg data-accordion-inactive-icon class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7.757v8.486M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-              </svg>
-              <svg data-accordion-active-icon class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-              </svg>
-              <span><%= type.name %></span>
-            </button>
-          </h2>
 
-          <div id="accordion-body-<%= dom_id(type) %>" class="hidden -mt-1" aria-labelledby="accordion-heading-<%= dom_id(type) %>">
+    <div class="ml-2 mt-1">
+      <div id="accordion-types" data-accordion="open" data-active-classes="bg-white text-gray-900" data-inactive-classes="text-gray-900">
+        <% @types.each do |type| %>
+          <%= render layout: "accordion_item", locals: { item: type, item_name: type.name } do %>
             <%= turbo_frame_tag type, src: show_products_catalog_index_path(params: { vehicle_id: @vehicle, product_type_id: type }), loading: "lazy" %>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </ul>
+      </div>
+    </div>
   </div>
 <% end %>
