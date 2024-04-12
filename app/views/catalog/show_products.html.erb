@@ -6,7 +6,7 @@
           <div>
             <p>
               <%= product.product_brand.name %> <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><%= product.product_number %></a>
-              <a href="#" class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Info</a>
+              <a href="<%= product_path(product) %>" data-turbo-frame="_top" class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Info</a>
             </p>
           </div>
           <div>

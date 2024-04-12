@@ -19,4 +19,6 @@ Rails.application.routes.draw do
       get :show_products
     end
   end
+
+  get "product/:id", to: "product#show", as: "product"
 end
