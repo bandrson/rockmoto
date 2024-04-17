@@ -9,4 +9,8 @@ class Province < ApplicationRecord
   validates :hst_rate,
             allow_blank:  true,
             numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1 }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    ["name", "gst_rate", "pst_rate", "hst_rate", "created_at", "updated_at"]
+  end
 end
