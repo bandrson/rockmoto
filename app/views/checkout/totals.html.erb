@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "totals" do %>
+  <p>Subtotal: $<%= @subtotal %></p>
+  <% if @gst_total > 0 %>
+    <p>GST: <%= number_to_currency(@gst_total) %></p>
+  <% end %>
+  <% if @pst_total > 0 %>
+    <p>PST: <%= number_to_currency(@pst_total) %></p>
+  <% end %>
+  <% if @hst_total > 0 %>
+    <p>HST: <%= number_to_currency(@hst_total) %></p>
+  <% end %>
+  <p>Order Total: <span class="font-bold"><%= number_to_currency(@total) %></span></p>
+<% end %>

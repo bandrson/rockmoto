@@ -9,3 +9,6 @@ application.register("toggle", ToggleController)
 
 import QuantityController from "./quantity_controller"
 application.register("quantity", QuantityController)
+
+import SelectTurboController from "./select_turbo_controller"
+application.register("select-turbo", SelectTurboController)

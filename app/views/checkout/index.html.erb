@@ -1,0 +1,85 @@
+<div class="w-full">
+  <h1 class="font-bold text-4xl">Checkout</h1>
+  <%= form_with url: "/order/new", method: :post do |form| %>
+    <div class="flex flex-row">
+      <div class="flex-1 bg-yellow-50 p-4">
+        <%= fields_for @customer do |customer_form| %>
+          <div class="mb-2">
+            <%= customer_form.label :full_name, "Full Name", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+            <%= customer_form.text_field :full_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+          </div>
+          <div class="mb-2">
+            <%= customer_form.label :email, "Email", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+            <%= customer_form.text_field :email, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+          </div>
+          <div class="mb-2">
+            <%= customer_form.label :phone_number, "Phone Number", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+            <%= customer_form.text_field :phone_number, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+          </div>
+          <div class="mb-2">
+            <%= customer_form.label :street_address1, "Street Address", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+            <%= customer_form.text_field :street_address1, class: "mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            <%= customer_form.text_field :street_address2, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+          </div>
+          <div class="mb-2">
+            <%= customer_form.label :city, "City", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+            <%= customer_form.text_field :city, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+          </div>
+          <div class="mb-2">
+            <%= customer_form.label :postal_code, "Postal Code", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+            <%= customer_form.text_field :postal_code, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+          </div>
+          <div class="mb-5" data-controller="select-turbo" data-select-turbo-url-value="/checkout/totals" data-select-turbo-url-param-value="province" data-select-turbo-frame-tag-value="totals">
+            <%= customer_form.label :province, "Province", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+            <%= customer_form.collection_select :province, Province.order(:name), :id, :name, {}, { data: { "select-turbo-target": "select" }, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
+          </div>
+          <%= form.submit "Place Order", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+        <% end %>
+      </div>
+      <div class="flex-1 bg-pink-50 p-4">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-3">
+                Product
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Price
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Quantity
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Total
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @cart.each do |product_id, quantity| %>
+              <% product = Product.find(product_id) %>
+              <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white flex flex-row items-center gap-1">
+                  <img class="border-[1px]" src="<%= url_for(product.image) %>" width="64" height="64" />
+                  <div class="flex-1"><%= product.product_brand.name %> <%= product.product_number %></div>
+                </td>
+                <td class="px-6 py-4">
+                  $<%= product.price %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= quantity %>
+                </td>
+                <td class="px-6 py-4">
+                  $<%= product.price * quantity %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+        <%= turbo_frame_tag "totals", src: checkout_totals_path %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
