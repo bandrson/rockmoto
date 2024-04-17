@@ -8,18 +8,19 @@ class Product < ApplicationRecord
   validates :product_number, presence: true
   validates :name, presence: true
   validates :description,
-            presence: true,
+            presence:    true,
             allow_blank: true
   validates :price,
-            presence: true,
+            presence:     true,
             numericality: { greater_than_or_equal_to: 0 }
   validates :extended_data, presence: true
 
-  def self.ransackable_associations(auth_object = nil)
+  def self.ransackable_associations(_auth_object = nil)
     ["product_brand", "product_category"]
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "name", "description", "price", "product_brand_id", "product_type_id", "product_number", "updated_at"]
+  def self.ransackable_attributes(_auth_object = nil)
+    ["created_at", "name", "description", "price", "product_brand_id", "product_type_id",
+     "product_number", "updated_at"]
   end
 end

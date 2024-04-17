@@ -77,3 +77,7 @@ gem "sassc-rails", "~> 2.1"
 
 # User authentication
 gem "devise", "~> 4.9"
+
+# Linter
+gem "rubocop", "~> 1.63"
+gem "rubocop-rails", "~> 2.24"

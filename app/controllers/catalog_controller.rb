@@ -31,9 +31,7 @@ class CatalogController < ApplicationController
     @types = []
     fitments.each do |fitment|
       type = fitment.product.product_type
-      if type.product_category == @category
-        @types.append(type)
-      end
+      @types.append(type) if type.product_category == @category
     end
     @types = @types.uniq
   end
@@ -45,9 +43,7 @@ class CatalogController < ApplicationController
     @products = []
     fitments.each do |fitment|
       product = fitment.product
-      if product.product_type == @type
-        @products.append(product)
-      end
+      @products.append(product) if product.product_type == @type
     end
     @products = @products.sort_by(&:price)
   end
