@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "cart" do %>
+  <div>
+    <h1 class="font-bold text-4xl">Cart</h1>
+    <ul>
+      <% @cart.each do |product_id, quantity| %>
+        <li>
+          <% product = Product.find(product_id) %>
+          <%= render partial: "cart_item", locals: { product: product, quantity: quantity } %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

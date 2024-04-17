@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'cart/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -21,4 +22,9 @@ Rails.application.routes.draw do
   end
 
   get "product/:id", to: "product#show", as: "product"
+
+  get "cart", to: "cart#index", as: "cart"
+  post "cart/add/:id", to: "cart#add_to_cart", as: "add_to_cart"
+  delete "cart/delete/:id", to: "cart#delete_from_cart", as: "delete_from_cart"
+  post "cart/update/:id", to: "cart#update_cart_quantity", as: "update_cart_quantity"
 end
