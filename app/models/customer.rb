@@ -6,7 +6,9 @@ class Customer < ApplicationRecord
             presence:   true,
             uniqueness: true,
             format:     { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, allow_nil: true
+  validates :password,
+            length:    { minimum: 8 },
+            allow_nil: true
   validates :phone_number, presence: true
   validates :street_address1, presence: true
   validates :street_address2,
