@@ -1,9 +1,26 @@
 <%= turbo_frame_tag "cart" do %>
   <div>
     <h1 class="font-bold text-4xl">Cart</h1>
-    <ul>
-      <% @cart.each do |product_id, quantity| %>
-        <li>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-4">
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Product
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Price
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Quantity
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Action
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @cart.each do |product_id, quantity| %>
           <% product = Product.find(product_id) %>
           <%= render partial: "cart_item", locals: { product: product, quantity: quantity } %>
         <% end %>
