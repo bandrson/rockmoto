@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'checkout/index'
-  get 'cart/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -31,4 +29,6 @@ Rails.application.routes.draw do
 
   get "checkout", to: "checkout#index", as: "checkout"
   get "checkout/totals", to: "checkout#totals", as: "checkout_totals"
+  post "checkout/place_order", to: "checkout#place_order", as: "checkout_place_order"
+  get "checkout/success", to: "checkout#success", as: "checkout_success"
 end

@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :customer
-  enum :status, %i[new paid shipped]
+  enum :status, %i[pending paid shipped delivered]
 
   validates :customer, presence: true
   validates :status, presence: true
