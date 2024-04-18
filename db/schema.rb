@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_11_015203) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_18_185919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -153,9 +153,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_11_015203) do
 
   create_table "provinces", force: :cascade do |t|
     t.string "name", null: false
-    t.decimal "pst_rate", precision: 10, scale: 2
-    t.decimal "gst_rate", precision: 10, scale: 2
-    t.decimal "hst_rate", precision: 10, scale: 2
+    t.decimal "pst_rate", precision: 10, scale: 9
+    t.decimal "gst_rate", precision: 10, scale: 9
+    t.decimal "hst_rate", precision: 10, scale: 9
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
