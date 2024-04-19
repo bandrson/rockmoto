@@ -3,7 +3,7 @@ class CheckoutController < ApplicationController
   before_action :load_cart
 
   def index
-    @customer = Customer.new
+    @customer = current_customer || Customer.new
   end
 
   def totals
@@ -20,31 +20,40 @@ class CheckoutController < ApplicationController
   end
 
   def place_order
-    # TODO: handle existing customers
-    @customer = Customer.new(customer_params)
-
-    if @customer.valid?
-      @customer.save
-
-      order = Order.new
-      order.customer = @customer
-      order.status = Order.statuses[:pending]
-      order.gst_rate = customer.province.gst_rate
-      order.pst_rate = customer.province.pst_rate
-      order.hst_rate = customer.province.hst_rate
-      order.save
-
-      cart = session[:cart]
-      cart.each do |product_id, quantity|
-        product = Product.find(product_id)
-        OrderItem.create(order_id: order.id, product:, price: product.price, quantity:)
+    if current_customer
+      @customer = current_customer
+      unless @customer.update(customer_params)
+        render :index, status: :unprocessable_entity # Form validation failed
+        return
       end
-
-      session[:cart] = {}
-      redirect_to checkout_success_path
     else
-      render :index, status: :unprocessable_entity # Form validation failed
+      @customer = Customer.new(customer_params)
+      @customer.skip_password_validation = true
+      if @customer.valid?
+        @customer.save
+      else
+        puts @customer.errors.inspect
+        render :index, status: :unprocessable_entity # Form validation failed
+        return
+      end
     end
+
+    order = Order.new
+    order.customer = @customer
+    order.status = Order.statuses[:pending]
+    order.gst_rate = @customer.province.gst_rate
+    order.pst_rate = @customer.province.pst_rate
+    order.hst_rate = @customer.province.hst_rate
+    order.save
+
+    cart = session[:cart]
+    cart.each do |product_id, quantity|
+      product = Product.find(product_id)
+      OrderItem.create(order_id: order.id, product:, price: product.price, quantity:)
+    end
+
+    session[:cart] = {}
+    redirect_to checkout_success_path
   end
 
   private
