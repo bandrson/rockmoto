@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get :show_products
     end
   end
+  get "search", to: "catalog#search", as: "search_catalog"
 
   get "product/:id", to: "product#show", as: "product"
 

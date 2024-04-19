@@ -1,0 +1,21 @@
+<div class="w-full flex flex-row gap-4">
+  <div class="flex-1"> <!-- Search -->
+    <h1 class="font-bold text-4xl">
+      Search <span class="text-lg font-normal text-gray-500 lg:text-xl">for "<%= params[:query] %>"
+      <% if @category %>
+        in <%= @category.name %>
+      <% end %>
+      </span>
+    </h1>
+    <ul class="border border-gray-200 rounded-lg mt-1">
+      <% @products.each do |product| %>
+        <li class="odd:bg-gray-100 even:bg-gray-200 border-b flex flex-row p-2">
+          <%= render partial: "product", locals: { product: product } %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="w-1/2"> <!-- Cart -->
+    <%= turbo_frame_tag "cart", src: cart_path %>
+  </div>
+</div>

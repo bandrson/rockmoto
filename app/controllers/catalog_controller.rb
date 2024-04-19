@@ -47,4 +47,16 @@ class CatalogController < ApplicationController
     end
     @products = @products.sort_by(&:price)
   end
+
+  def search
+    if params[:category].blank?
+      @types = ProductType.all
+    else
+      @category = ProductCategory.find(params[:category])
+      @types = ProductType.where(product_category: @category)
+    end
+    @filtered_types = @types.where("name LIKE ? OR description LIKE ?",
+                                   "%#{params[:query]}%", "%#{params[:query]}%")
+    @products = Product.where(product_type: @filtered_types)
+  end
 end
