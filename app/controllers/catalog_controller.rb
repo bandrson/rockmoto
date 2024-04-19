@@ -55,8 +55,8 @@ class CatalogController < ApplicationController
       @category = ProductCategory.find(params[:category])
       @types = ProductType.where(product_category: @category)
     end
-    @filtered_types = @types.where("name LIKE ? OR description LIKE ?",
-                                   "%#{params[:query]}%", "%#{params[:query]}%")
+    @filtered_types = @types.where("LOWER(name) LIKE ? OR LOWER(description) LIKE ?",
+                                   "%#{params[:query].downcase}%", "%#{params[:query].downcase}%")
     @products = Product.where(product_type: @filtered_types)
   end
 end
