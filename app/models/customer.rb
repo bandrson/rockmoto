@@ -1,4 +1,8 @@
 class Customer < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
   belongs_to :province
 
   validates :full_name, presence: true
@@ -6,9 +10,7 @@ class Customer < ApplicationRecord
             presence:   true,
             uniqueness: true,
             format:     { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password,
-            length:    { minimum: 8 },
-            allow_nil: true
+  validates :password, length: { minimum: 8 }
   validates :phone_number, presence: true
   validates :street_address1, presence: true
   validates :street_address2,
