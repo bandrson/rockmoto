@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Main routes
   root "catalog#index"
-  devise_for :customers
+  devise_for :customers, :controllers => { registrations: 'customers/registrations' }
 
   resources :catalog do
     collection do

@@ -10,7 +10,7 @@ class Customer < ApplicationRecord
             presence:   true,
             uniqueness: true,
             format:     { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, length: { minimum: 8 }
+  validates :password, length: { minimum: 6 }
   validates :phone_number, presence: true
   validates :street_address1, presence: true
   validates :street_address2,
