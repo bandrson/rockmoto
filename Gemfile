@@ -81,3 +81,6 @@ gem "devise", "~> 4.9"
 # Linter
 gem "rubocop", "~> 1.63"
 gem "rubocop-rails", "~> 2.24"
+
+# Seed data
+gem "faker", "~> 3.3.1"

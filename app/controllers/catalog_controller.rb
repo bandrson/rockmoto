@@ -5,7 +5,7 @@ class CatalogController < ApplicationController
 
   def show_years
     @make = VehicleMake.where(name: params[:make]).first
-    @years = @make.vehicle_years.all.order(:year)
+    @years = @make.vehicle_years.all.order(:year).reverse
   end
 
   def show_models

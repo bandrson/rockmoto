@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_19_070106) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_20_192512) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -114,12 +114,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_070106) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_product_brands_on_name", unique: true
   end
 
   create_table "product_categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_product_categories_on_name", unique: true
   end
 
   create_table "product_fitments", force: :cascade do |t|
@@ -137,6 +139,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_070106) do
     t.bigint "product_category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_product_types_on_name", unique: true
     t.index ["product_category_id"], name: "index_product_types_on_product_category_id"
   end
 
@@ -168,18 +171,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_070106) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_vehicle_makes_on_name", unique: true
   end
 
   create_table "vehicle_models", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_vehicle_models_on_name", unique: true
   end
 
   create_table "vehicle_years", force: :cascade do |t|
     t.integer "year", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["year"], name: "index_vehicle_years_on_year", unique: true
   end
 
   create_table "vehicles", force: :cascade do |t|
