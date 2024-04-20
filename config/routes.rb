@@ -29,4 +29,6 @@ Rails.application.routes.draw do
   get "checkout/totals", to: "checkout#totals", as: "checkout_totals"
   post "checkout/place_order", to: "checkout#place_order", as: "checkout_place_order"
   get "checkout/success", to: "checkout#success", as: "checkout_success"
+
+  get "orders", to: "order#index", as: "orders"
 end

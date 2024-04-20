@@ -27,6 +27,9 @@
         </li>
         <% if current_customer %>
           <li>
+            <%= link_to "My Orders", orders_path, class: "block hover:text-blue-700" %>
+          </li>
+          <li>
             <%= button_to "Sign out", destroy_customer_session_path, method: :delete, class: "block hover:text-blue-700" %>
           </li>
           <% else %>

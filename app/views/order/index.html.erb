@@ -1,0 +1,36 @@
+<div>
+  <h1 class="font-bold text-4xl mb-5">My Orders</h1>
+
+  <ol class="relative border-s border-gray-200 mb-6">
+    <% @orders.each do |o| %>
+      <li class="mb-10 ms-4">
+        <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white"></div>
+        <time class="mb-1 text-sm font-normal leading-none text-gray-400">
+          <%= o.created_at %>
+        </time>
+        <h3 class="text-lg font-semibold text-gray-900">Order #<%= o.id %> - <%= number_to_currency(o.grand_total) %></h3>
+        <ul class="space-y-1 text-gray-500 list-disc list-inside mb-1">
+          <% o.order_items.each do |i| %>
+            <% p = i.product %>
+            <li>
+              <%= p.product_brand.name %> <%= p.product_type.name %> x <%= i.quantity %>
+            </li>
+          <% end %>
+        </ul>
+        <div>
+          Subtotal: <%= number_to_currency(o.subtotal) %>
+          <% if o.gst_rate != nil %>
+            <p>GST (<%= rate_to_percentage(o.gst_rate) %>): <%= number_to_currency(o.gst_total) %></p>
+          <% end %>
+          <% if o.pst_rate != nil %>
+            <p>PST (<%= rate_to_percentage(o.pst_rate) %>): <%= number_to_currency(o.pst_total) %></p>
+          <% end %>
+          <% if o.hst_rate != nil %>
+            <p>HST (<%= rate_to_percentage(o.hst_rate) %>): <%= number_to_currency(o.hst_rate) %></p>
+          <% end %>
+          <p>Total: <%= number_to_currency(o.grand_total) %></p>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+</div>
