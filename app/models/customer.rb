@@ -21,7 +21,6 @@ class Customer < ApplicationRecord
   validates :postal_code, presence: true
   validates :province, presence: true
 
-
   protected
 
   def password_required?

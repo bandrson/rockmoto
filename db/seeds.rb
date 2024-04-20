@@ -44,7 +44,8 @@ brand_ids = ProductBrand.pluck(:id)
   type_id = type_ids.sample
   Product.create!(product_brand_id: brand_ids.sample, product_type_id: type_id,
                   product_number: Faker::Vehicle.vin, description: Faker::Commerce.material,
-                  price: Faker::Commerce.price, name: "#{Faker::Adjective.positive} #{ProductType.find(type_id).name}")
+                  price: Faker::Commerce.price,
+                  name: "#{Faker::Adjective.positive} #{ProductType.find(type_id).name}")
 end
 
 # Vehicle Makes

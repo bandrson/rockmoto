@@ -20,39 +20,10 @@ class CheckoutController < ApplicationController
   end
 
   def place_order
-    if current_customer
-      @customer = current_customer
-      unless @customer.update(customer_params)
-        render :index, status: :unprocessable_entity # Form validation failed
-        return
-      end
-    else
-      @customer = Customer.new(customer_params)
-      @customer.skip_password_validation = true
-      if @customer.valid?
-        @customer.save
-      else
-        puts @customer.errors.inspect
-        render :index, status: :unprocessable_entity # Form validation failed
-        return
-      end
-    end
+    validated = current_customer ? handle_current_customer : handle_new_customer
+    render :index, status: :unprocessable_entity and return unless validated
 
-    order = Order.new
-    order.customer = @customer
-    order.status = Order.statuses[:pending]
-    order.gst_rate = @customer.province.gst_rate
-    order.pst_rate = @customer.province.pst_rate
-    order.hst_rate = @customer.province.hst_rate
-    order.save
-
-    cart = session[:cart]
-    cart.each do |product_id, quantity|
-      product = Product.find(product_id)
-      OrderItem.create(order_id: order.id, product:, price: product.price, quantity:)
-    end
-
-    session[:cart] = {}
+    create_order_from_cart(@customer)
     redirect_to checkout_success_path
   end
 
@@ -68,6 +39,37 @@ class CheckoutController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:full_name, :email, :phone_number, :street_address1,
-                                     :street_address2, :city, :postal_code, :postal_code, :province_id)
+                                     :street_address2, :city, :postal_code, :postal_code,
+                                     :province_id)
+  end
+
+  def handle_current_customer
+    @customer = current_customer
+    @customer.update(customer_params) # true if success, false otherwise
+  end
+
+  def handle_new_customer
+    @customer = Customer.new(customer_params)
+    @customer.skip_password_validation = true
+    @customer.save
+  end
+
+  def create_order_from_cart(cust)
+    create_order_items(create_order(cust), session[:cart])
+    session[:cart] = {}
+  end
+
+  def create_order(cust)
+    Order.create!(customer: cust, status: Order.statuses[:pending],
+                  gst_rate: cust.province.gst_rate,
+                  pst_rate: cust.province.pst_rate,
+                  hst_rate: cust.province.hst_rate)
+  end
+
+  def create_order_items(order, cart)
+    cart.each do |product_id, quantity|
+      product = Product.find(product_id)
+      OrderItem.create(order_id: order.id, product:, price: product.price, quantity:)
+    end
   end
 end
