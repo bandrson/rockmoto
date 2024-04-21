@@ -1,7 +1,7 @@
 <div class="w-full">
-  <h1 class="font-bold text-4xl">Checkout</h1>
-  <div class="flex flex-row">
-    <div class="flex-1 p-4">
+  <h1 class="font-bold text-4xl mb-2">Checkout</h1>
+  <div class="flex flex-row gap-8">
+    <div class="flex-1">
       <%= form_with model: @customer, url: checkout_place_order_path, method: :post do |customer_form| %>
         <div class="mb-2">
           <%= customer_form.label :full_name, "Full Name", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
@@ -35,8 +35,8 @@
         <%= customer_form.submit "Place Order", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
       <% end %>
     </div>
-    <div class="flex-1 p-4">
-      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="flex-1">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-4">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -78,7 +78,7 @@
           </tbody>
         </table>
       </div>
-      <%= turbo_frame_tag "totals", src: checkout_totals_path %>
+      <%= turbo_frame_tag "totals", src: "#{checkout_totals_path}?province=#{Province.order(:name).first.id}" %>
     </div>
   </div>
 </div>

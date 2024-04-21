@@ -5,7 +5,7 @@ end
 
 # Provinces
 Province.create!(name: "British Columbia", pst_rate: 0.07, gst_rate: 0.05)
-Province.create!(name: "Alberta", gst_rate: 0.07)
+Province.create!(name: "Alberta", gst_rate: 0.05)
 Province.create!(name: "Saskatchewan", pst_rate: 0.06, gst_rate: 0.05)
 Province.create!(name: "Manitoba", pst_rate: 0.07, gst_rate: 0.05)
 Province.create!(name: "Ontario", hst_rate: 0.13)

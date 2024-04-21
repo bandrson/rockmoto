@@ -1,32 +1,39 @@
 <%= turbo_frame_tag "cart" do %>
-  <div>
-    <h1 class="font-bold text-4xl">Cart</h1>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-4">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">
-            Product
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Price
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Quantity
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Action
-          </th>
-        </tr>
-        </thead>
-        <tbody>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-6">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          Product
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Price
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Quantity
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Action
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if @cart.count > 0 %>
         <% @cart.each do |product_id, quantity| %>
           <% product = Product.find(product_id) %>
           <%= render partial: "cart_item", locals: { product: product, quantity: quantity } %>
         <% end %>
-        </tbody>
-      </table>
-    </div>
-    <%= link_to "Checkout", checkout_path, data: { turbo_frame: "_top" }, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+      <% else %>
+        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+          <td class="px-6 py-4 font-medium text-gray-900">
+              Your cart is empty.
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
+  <% if @cart.count > 0 %>
+    <%= link_to "Checkout", checkout_path, data: { turbo_frame: "_top" }, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+  <% end %>
 <% end %>
