@@ -1,6 +1,8 @@
 <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
   <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white flex flex-row items-center gap-1">
-    <img class="border-[1px]" src="<%= url_for(product.image) %>" width="64" height="64" />
+    <% if product.image.attached? %>
+      <img class="border-[1px]" src="<%= url_for(product.image) %>" width="64" height="64" />
+    <% end %>
     <div class="flex-1"><%= product.product_brand.name %> <%= product.product_number %></div>
   </td>
   <td class="px-6 py-4">
