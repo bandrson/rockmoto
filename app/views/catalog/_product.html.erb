@@ -15,7 +15,7 @@
   <% end %>
 </div> <!-- Image -->
 <form class="flex" action="<%= add_to_cart_path(product) %>" method="post">
-  <div class="font-bold">$<%= product.price %></div>
+  <div class="font-bold"><%= number_to_currency(product.price) %></div>
   <div class="relative mr-3 formkit-field">
     <div class="relative flex items-center max-w-[8rem]" data-controller="quantity">
       <button type="button" data-action="quantity#decrement"  class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
